@@ -3,16 +3,19 @@ package org.acme.dto;
 public class ParentDTO {
     private long parentId;
     private String firstName;
+
+    public ParentDTO(long parentId, String firstName, String lastName) {
+        this.parentId = parentId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     private String lastName;
 
     public ParentDTO() {
     }
 
-    public ParentDTO( long parentId,String firstName, String lastName) {
-        this.setFirstName(firstName);
-        this.setParentId(parentId);
-        this.setLastName(lastName);
-    }
+
 
 
     public long getParentId() {

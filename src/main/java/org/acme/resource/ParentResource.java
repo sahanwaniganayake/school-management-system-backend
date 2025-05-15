@@ -12,7 +12,7 @@ import org.acme.dto.ParentDTO;
 import org.acme.model.Parent;
 import org.acme.service.ParentService;
 
-@Path("/parents")
+@Path("/api/parents")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ParentResource {

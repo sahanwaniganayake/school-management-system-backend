@@ -1,15 +1,17 @@
 package org.acme.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
 public class Student extends PanacheEntityBase {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long studentId;
+
     private String firstName;
     private String LastName;
     private String email;
@@ -19,6 +21,8 @@ public class Student extends PanacheEntityBase {
     @ManyToOne
     @JoinColumn(name = "parentId", nullable = false)
     private Parent parent;
+
+
 
 
 
