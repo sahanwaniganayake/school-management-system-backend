@@ -3,14 +3,18 @@ package org.acme.dto;
 public class ParentDTO {
     private long parentId;
     private String firstName;
+    private String lastName;
+    private String email;
+    private String contactNum;
 
-    public ParentDTO(long parentId, String firstName, String lastName) {
+
+    public ParentDTO(long parentId, String firstName, String lastName, String email, String contactNum) {
         this.parentId = parentId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
+        this.contactNum = contactNum;
     }
-
-    private String lastName;
 
     public ParentDTO() {
     }
@@ -40,5 +44,21 @@ public class ParentDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContactNum() {
+        return contactNum;
+    }
+
+    public void setContactNum(String contactNum) {
+        this.contactNum = contactNum;
     }
 }

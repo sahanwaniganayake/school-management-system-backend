@@ -19,6 +19,12 @@ public class Parent extends PanacheEntityBase {
     @Column(nullable = false)
     private String lastName;
 
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String contactNum;
+
     @OneToMany(mappedBy = "parent")
     private List<Student> students;
 
@@ -45,5 +51,21 @@ public class Parent extends PanacheEntityBase {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContactNum() {
+        return contactNum;
+    }
+
+    public void setContactNum(String contactNum) {
+        this.contactNum = contactNum;
     }
 }

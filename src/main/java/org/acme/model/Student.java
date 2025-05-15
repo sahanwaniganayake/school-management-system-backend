@@ -12,10 +12,19 @@ public class Student extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long studentId;
 
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String LastName;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private LocalDate dob;
+
+    @Column(nullable = false)
     private String contactNum;
 
     @ManyToOne

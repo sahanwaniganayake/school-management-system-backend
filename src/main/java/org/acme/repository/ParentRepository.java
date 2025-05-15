@@ -7,4 +7,5 @@ import org.acme.model.Parent;
 
 @ApplicationScoped
 public class ParentRepository implements PanacheRepository<Parent> {
+
 }
