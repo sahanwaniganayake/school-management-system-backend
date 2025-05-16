@@ -91,4 +91,15 @@ public class StudentResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteStudent(@PathParam("id") Long id ){
+        try{
+            studentService.deleteStudent(id);
+            return Response.status(Response.Status.OK).entity("Student deleted Successfully").build();
+        }catch (IllegalArgumentException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
 }

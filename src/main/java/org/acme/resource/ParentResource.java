@@ -21,8 +21,8 @@ public class ParentResource {
     ParentService parentService;
 
     @POST
-    public Response createParent(ParentDTO parentDTO){
-        Parent parent= new Parent();
+    public Response createParent(ParentDTO parentDTO) {
+        Parent parent = new Parent();
         parent.setParentId(parentDTO.getParentId());
         parent.setFirstName(parentDTO.getFirstName());
         parent.setLastName(parentDTO.getLastName());
@@ -42,7 +42,7 @@ public class ParentResource {
 
     @Path("/{id}")
     @GET
-    public Response getParentById(@PathParam("id") Long parentId){
+    public Response getParentById(@PathParam("id") Long parentId) {
 
         try {
             Parent parent = parentService.getParentById(parentId);
@@ -56,22 +56,22 @@ public class ParentResource {
             );
 
             return Response.status(Response.Status.OK).entity(responseDTO).build();
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 
     @Path("/{id}")
     @PUT
-    public Response updateParent(@PathParam("id")Long id, ParentDTO parentDTO){
-        try{
+    public Response updateParent(@PathParam("id") Long id, ParentDTO parentDTO) {
+        try {
             Parent parent = new Parent();
             parent.setParentId(parentDTO.getParentId());
             parent.setFirstName(parentDTO.getFirstName());
             parent.setLastName(parentDTO.getLastName());
             parent.setEmail(parentDTO.getEmail());
             parent.setContactNum(parentDTO.getContactNum());
-            Parent updatedParent = parentService.updateParent(id,parent);
+            Parent updatedParent = parentService.updateParent(id, parent);
 
             ParentDTO responseDTO = new ParentDTO(
                     updatedParent.getParentId(),
@@ -82,7 +82,18 @@ public class ParentResource {
 
             );
             return Response.status(Response.Status.OK).entity(responseDTO).build();
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteParent(@PathParam("id") Long id){
+        try{
+            parentService.deleteParent(id);
+            return Response.status(Response.Status.OK).entity("Parent deleted successfully").build();
+        }catch(IllegalArgumentException e){
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }

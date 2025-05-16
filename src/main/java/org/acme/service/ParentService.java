@@ -69,4 +69,14 @@ public class ParentService {
         return existingParent;
     }
 
+    @Transactional
+    public void deleteParent(Long id){
+        if(parentRepository.findById(id)==null){
+            throw new IllegalArgumentException("Parent not found");
+        }
+        parentRepository.deleteById(id);
+    }
+
 }
+
+

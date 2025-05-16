@@ -70,4 +70,12 @@ public class StudentService {
 
         return existingStudent;
     }
+
+    @Transactional
+    public void deleteStudent(Long id){
+        if(studentRepository.findById(id)==null){
+            throw new IllegalArgumentException("Student not found");
+        }
+        studentRepository.deleteById(id);
+    }
 }
