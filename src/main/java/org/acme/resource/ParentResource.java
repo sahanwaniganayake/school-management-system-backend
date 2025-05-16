@@ -40,18 +40,50 @@ public class ParentResource {
         return Response.status(Response.Status.CREATED).entity(responseDTO).build();
     }
 
+    @Path("/{id}")
     @GET
-    public Response getStudent(@QueryParam("id") Long parentId){
-        if(parentId != null){
-            Parent parent = parentService.getParents(parentId);
-            if(parent !=null){
-                return Response.status(Response.Status.OK).entity(parent).build();
-            }else{
-                return Response.status(Response.Status.BAD_REQUEST).entity("Parent not found").build();
-            }
-        }else {
-            List<Parent> parents = parentService.getParents();
-            return Response.status(Response.Status.OK).entity(parents).build();
+    public Response getParentById(@PathParam("id") Long parentId){
+
+        try {
+            Parent parent = parentService.getParentById(parentId);
+
+            ParentDTO responseDTO = new ParentDTO(
+                    parent.getParentId(),
+                    parent.getFirstName(),
+                    parent.getLastName(),
+                    parent.getEmail(),
+                    parent.getContactNum()
+            );
+
+            return Response.status(Response.Status.OK).entity(responseDTO).build();
+        }catch(IllegalArgumentException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+    @Path("/{id}")
+    @PUT
+    public Response updateParent(@PathParam("id")Long id, ParentDTO parentDTO){
+        try{
+            Parent parent = new Parent();
+            parent.setParentId(parentDTO.getParentId());
+            parent.setFirstName(parentDTO.getFirstName());
+            parent.setLastName(parentDTO.getLastName());
+            parent.setEmail(parentDTO.getEmail());
+            parent.setContactNum(parentDTO.getContactNum());
+            Parent updatedParent = parentService.updateParent(id,parent);
+
+            ParentDTO responseDTO = new ParentDTO(
+                    updatedParent.getParentId(),
+                    updatedParent.getFirstName(),
+                    updatedParent.getLastName(),
+                    updatedParent.getEmail(),
+                    updatedParent.getContactNum()
+
+            );
+            return Response.status(Response.Status.OK).entity(responseDTO).build();
+        }catch (IllegalArgumentException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 }

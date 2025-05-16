@@ -1,12 +1,10 @@
 package org.acme.resource;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.acme.dto.ParentDTO;
 import org.acme.dto.StudentDTO;
 import org.acme.model.Parent;
 import org.acme.model.Student;
@@ -49,6 +47,47 @@ public class StudentResource {
             );
             return Response.status(Response.Status.CREATED).entity(responseDTO).build();
         }catch(IllegalArgumentException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+
+
+
+
+
+    @Path("/{id}")
+    @PUT
+    public Response updateStudent(@PathParam("id")Long id, StudentDTO studentDTO){
+        try{
+            Student student = new Student();
+            student.setStudentId(studentDTO.getStudentId());
+            student.setFirstName(studentDTO.getFirstName());
+            student.setLastName(studentDTO.getLastName());
+            student.setEmail(studentDTO.getEmail());
+            student.setDob(studentDTO.getDob());
+            student.setContactNum(studentDTO.getContactNum());
+
+            Parent parent = new Parent();
+            parent.setParentId(studentDTO.getParentId());
+            student.setParent(parent);
+
+            Student updatedStudent = studentService.updateStudent(id,student);
+
+
+
+            StudentDTO responseDTO = new StudentDTO(
+                    updatedStudent.getStudentId(),
+                    updatedStudent.getFirstName(),
+                    updatedStudent.getLastName(),
+                    updatedStudent.getEmail(),
+                    updatedStudent.getDob(),
+                    updatedStudent.getContactNum(),
+                    updatedStudent.getParent().getParentId()
+
+            );
+            return Response.status(Response.Status.OK).entity(responseDTO).build();
+        }catch (IllegalArgumentException e){
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }

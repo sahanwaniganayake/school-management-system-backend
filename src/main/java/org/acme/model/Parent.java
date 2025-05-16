@@ -13,16 +13,12 @@ public class Parent extends PanacheEntityBase {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long parentId;
 
-    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String contactNum;
 
     @OneToMany(mappedBy = "parent")
